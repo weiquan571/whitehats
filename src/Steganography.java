@@ -298,41 +298,49 @@ public class Steganography
                 int check1=0;
                 int value = 0;
                 boolean isMiddleSpike= false;
+
                 try {
 
                     value = mapHistory.get(a);
-                    byte a1 = (byte)(a-1);
-                    byte a2 = (byte)(a+1);
+
+                    Byte getByte = a;
+                    int leftvalue = getByte.intValue() - 1;
+                    //int intval = a.intValue();
+
+                    int rightvalue = getByte.intValue() + 1;
                     //System.out.println("value of a-1: " + a1);
                     //System.out.println("value of a+1: " + a2);
                     int valueLeft=0;
                     int valueRight=0;
 
-                    if (mapHistory.containsKey(a1)){
+                    if (leftvalue>= -128 && leftvalue <=127){
+                        byte a1 = (byte)(leftvalue);
                         checker++;
                         valueLeft = mapHistory.get(a1);
-                        if ( value >= (valueLeft*0.95)){
+                        if ( value >= (valueLeft)){
                             check ++;
                             //System.out.println("left is true");
                         }
-                        if ( value <= (valueLeft*1.02)){
+                        if ( value <= (valueLeft)){
                             check1++;
                         }
 
                     }
-                    if (mapHistory.containsKey(a2)){
+                    if (rightvalue>= -128 && rightvalue <=127){
+                        byte a2 = (byte)(rightvalue);
                         valueRight = mapHistory.get(a2);
                         checker++;
-                        if (value <= (valueRight*1.02)){
+                        if (value <= (valueRight)){
                             check ++;
                         }
-                        if ( value >= (valueRight*0.95)){
+                        if ( value >= (valueRight)){
                             check1++;
                         }
                         //System.out.println("right is true");
-                        if (valueLeft>0 && valueRight > 0 && value > valueRight && value > valueLeft ){
-                            isMiddleSpike = true;
-                        }
+
+                    }
+                    if (valueLeft>0 && valueRight > 0 && value > valueRight && value > valueLeft ){
+                        isMiddleSpike = true;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

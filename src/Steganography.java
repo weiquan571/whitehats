@@ -350,7 +350,10 @@ public class Steganography
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if ( (leftchecker && rightchecker && leftcheck && rightcheck) || (leftchecker && rightchecker && leftcheck1 && rightcheck1 ) || (!leftchecker && rightchecker && rightcheck) || (!leftchecker && rightchecker && rightcheck1) || (!rightchecker && leftchecker && leftcheck ) || (!rightchecker && leftchecker && leftcheck1) || isMiddleSpike){
+                if ( (leftchecker && rightchecker && leftcheck && rightcheck) || (leftchecker && rightchecker && leftcheck1 && rightcheck1 )
+                        || (!leftchecker && rightchecker && rightcheck) ||
+                        (!leftchecker && rightchecker && rightcheck1) || (!rightchecker && leftchecker && leftcheck ) ||
+                        (!rightchecker && leftchecker && leftcheck1) ){
                     //System.out.println("Value:" + value +" left:" +valueLeft + " right: " + valueRight);
                     image[offset] = a;
                     //int valuea = mapHistory.get(a);

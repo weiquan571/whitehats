@@ -44,13 +44,13 @@ public class TestHistogram {
         //Path path = Paths.get("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\LionInGrass_868x592_24.bmp");
 
         //Path path1 = Paths.get("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\abcdefg.txt");
-        String msg = new String(Files.readAllBytes(Paths.get("C:\\\\Users\\\\Jonathan\\\\Downloads\\\\Day2\\\\ShoppingCartEx1\\\\Design1\\\\wh\\\\src\\\\input.txt")));
+        String msg = new String(Files.readAllBytes(Paths.get("C:\\Users\\Jonathan\\Desktop\\a\\wh\\src\\input.txt")));
         //byte[] msg = Files.readAllBytes(path1);
         //String msg = "";
         Stegno1 steg = new Stegno1();
-        steg.encode("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src","11","bmp","standard",msg);
+        steg.encode("C:\\Users\\Jonathan\\Desktop","11","bmp","standard",msg);
         Steganography st = new Steganography();
-        st.encode("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src","11","bmp","enhanced",msg);
+        st.encode("C:\\Users\\Jonathan\\Desktop","11","bmp","enhanced",msg);
         //st.encode_with_byte("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src","LionInGrass_868x592_24","bmp","haha",msg);
 
         //String decodedmsg = st.decode("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src","haha");
@@ -60,7 +60,7 @@ public class TestHistogram {
 
 
         try {
-            Map<Byte,Integer> mapHistory11 = getTreeMap("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\11.bmp");
+            Map<Byte,Integer> mapHistory11 = getTreeMap("C:\\Users\\Jonathan\\Desktop\\11.bmp");
 
             /*
             for ( Byte treekey : mapHistory.keySet()){
@@ -83,7 +83,7 @@ public class TestHistogram {
             e.printStackTrace();
         }
         try {
-            Map<Byte,Integer> mapHistory = getTreeMap("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\standard.bmp");
+            Map<Byte,Integer> mapHistory = getTreeMap("C:\\Users\\Jonathan\\Desktop\\standard.bmp");
 
             /*
             for ( Byte treekey : mapHistory.keySet()){
@@ -106,7 +106,7 @@ public class TestHistogram {
             e.printStackTrace();
         }
         try {
-            Map<Byte,Integer> mapHistory1 = getTreeMap("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\enhanced.bmp");
+            Map<Byte,Integer> mapHistory1 = getTreeMap("C:\\Users\\Jonathan\\Desktop\\enhanced.bmp");
 
             /*
             for ( Byte treekey : mapHistory.keySet()){

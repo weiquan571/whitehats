@@ -293,7 +293,9 @@ public class Steganography
                 byte a = (byte)((image[offset] & 0xFE) | b );
                 int check= 0;
                 int checker = 0 ;
+                int check1=0;
                 int value = 0;
+                boolean isMiddleSpike= false;
                 try {
 
                     value = mapHistory.get(a);
@@ -301,33 +303,48 @@ public class Steganography
                     byte a2 = (byte)(a+1);
                     //System.out.println("value of a-1: " + a1);
                     //System.out.println("value of a+1: " + a2);
+                    int valueLeft=0;
+                    int valueRight=0;
+
                     if (mapHistory.containsKey(a1)){
                         checker++;
-                        int valueLeft = mapHistory.get(a1);
-                        if ( value >= (valueLeft/1.05)){
+                        valueLeft = mapHistory.get(a1);
+                        if ( value >= (valueLeft/1.03)){
                             check ++;
                             //System.out.println("left is true");
                         }
+                        if ( value <= (valueLeft*1.03)){
+                            check1++;
+                        }
+
                     }
                     if (mapHistory.containsKey(a2)){
-                        int valueRight = mapHistory.get(a2);
+                        valueRight = mapHistory.get(a2);
                         checker++;
-                        if (value <= (valueRight*1.05)){
+                        if (value <= (valueRight*1.03)){
                             check ++;
                         }
+                        if ( value >= (valueRight/1.03)){
+                            check1++;
+                        }
                         //System.out.println("right is true");
+                        if (value > valueRight && value > valueLeft ){
+                            isMiddleSpike = true;
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (check!=checker){
-                    ++bit;
-                    //System.out.println("NOT IN RANGE");
-                }else {
+                if (check==checker || check1==checker || isMiddleSpike){
+
                     image[offset] = a;
                     //int valuea = mapHistory.get(a);
                     mapHistory.put(a,++value);
                     output.add(Integer.toString(offset));
+                    //System.out.println("NOT IN RANGE");
+                }else {
+                    ++bit;
+
 
 
 
@@ -338,6 +355,8 @@ public class Steganography
 
             }
         }
+
+        /*
         try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\stegno-index.txt", true);
              BufferedWriter bb = new BufferedWriter(f);
              PrintWriter p = new PrintWriter(bb);)
@@ -352,6 +371,7 @@ public class Steganography
         {
             s.printStackTrace();
         }
+        */
         return image;
     }
 

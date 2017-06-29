@@ -290,6 +290,8 @@ public class Steganography
                 int b = (add >>> bit) & 1;
                 //assign the bit by taking: [(previous byte value) AND 0xfe] OR bit to add
                 //changes the last bit of the byte in the image to be the bit of addition
+                byte oldbyte = (byte)(image[offset]);
+                int oldbytevalue = mapHistory.get(oldbyte);
                 byte a = (byte)((image[offset] & 0xFE) | b );
                 int check= 0;
                 int checker = 0 ;
@@ -328,7 +330,7 @@ public class Steganography
                             check1++;
                         }
                         //System.out.println("right is true");
-                        if (value > valueRight && value > valueLeft ){
+                        if (valueLeft>0 && valueRight > 0 && value > valueRight && value > valueLeft ){
                             isMiddleSpike = true;
                         }
                     }
@@ -340,6 +342,7 @@ public class Steganography
                     image[offset] = a;
                     //int valuea = mapHistory.get(a);
                     mapHistory.put(a,++value);
+                    mapHistory.put(oldbyte,--oldbytevalue);
                     output.add(Integer.toString(offset));
                     //System.out.println("NOT IN RANGE");
                 }else {

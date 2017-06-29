@@ -293,7 +293,12 @@ public class Steganography
                 byte oldbyte = (image[offset]);
                 int oldbytevalue = mapHistory.get(oldbyte);
                 byte a = (byte)((image[offset] & 0xFE) | b );
-                int check= 0;
+                boolean leftcheck= false;
+                boolean  leftcheck1 =false;
+                boolean leftchecker=false;
+                boolean rightchecker=false;
+                boolean rightcheck=false;
+                boolean rightcheck1=false;
                 int checker = 0 ;
                 int check1=0;
                 int value = 0;
@@ -314,28 +319,27 @@ public class Steganography
                     //System.out.println("value of a+1: " + a2);
 
 
-                    if (leftvalue>= -128 && leftvalue <=127){
-                        byte a1 = (byte)(leftvalue);
-                        checker++;
+                    if (leftvalue>= -128 && leftvalue <=127){ // check if there is any byte on the left
+                        byte a1 = (byte)(leftvalue); // convert new int value to byte value
+                        leftchecker =true;
                         valueLeft = mapHistory.get(a1);
                         if ( value >= ((valueLeft)*1.05)){
-                            check ++;
-                            //System.out.println("left is true");
+                            leftcheck =true;
                         }
                         if ( value <= ((valueLeft)*0.95)){
-                            check1++;
+                            leftcheck1=true;
                         }
 
                     }
                     if (rightvalue>= -128 && rightvalue <=127){
                         byte a2 = (byte)(rightvalue);
                         valueRight = mapHistory.get(a2);
-                        checker++;
+                        rightchecker=true;
                         if (value <= ((valueRight)*0.95)){
-                            check ++;
+                            rightcheck =true;
                         }
                         if ( value >= ((valueRight)*1.05)){
-                            check1++;
+                            rightcheck1=true;
                         }
                         //System.out.println("right is true");
 
@@ -346,8 +350,8 @@ public class Steganography
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (check==checker || check1==checker ){
-                    System.out.println("Value:" + value +" left:" +valueLeft + " right: " + valueRight);
+                if ( (leftchecker && rightchecker && leftcheck && rightcheck) || (leftchecker && rightchecker && leftcheck1 && rightcheck1 ) || (!leftchecker && rightchecker && rightcheck) || (!leftchecker && rightchecker && rightcheck1) || (!rightchecker && leftchecker && leftcheck ) || (!rightchecker && leftchecker && leftcheck1) || isMiddleSpike){
+                    //System.out.println("Value:" + value +" left:" +valueLeft + " right: " + valueRight);
                     image[offset] = a;
                     //int valuea = mapHistory.get(a);
                     mapHistory.put(a,++value);

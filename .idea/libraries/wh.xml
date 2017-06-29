@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="wh">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/production/wh/jcommon-1.0.23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/production/wh/jogl-all.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/production/wh/gluegen-rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/production/wh/jfreechart-1.0.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/production/wh/jfreechart-1.0.19-demo.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

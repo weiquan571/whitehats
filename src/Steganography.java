@@ -309,7 +309,7 @@ public class Steganography
                     if (mapHistory.containsKey(a1)){
                         checker++;
                         valueLeft = mapHistory.get(a1);
-                        if ( value >= (valueLeft/1.03)){
+                        if ( value >= (valueLeft*0.95)){
                             check ++;
                             //System.out.println("left is true");
                         }
@@ -324,7 +324,7 @@ public class Steganography
                         if (value <= (valueRight*1.03)){
                             check ++;
                         }
-                        if ( value >= (valueRight/1.03)){
+                        if ( value >= (valueRight*0.95)){
                             check1++;
                         }
                         //System.out.println("right is true");

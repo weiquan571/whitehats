@@ -52,8 +52,8 @@ public class TestHistogram {
         st.encode("C:\\Users\\Jonathan\\Desktop","11","bmp","enhanced",msg);
         //st.encode_with_byte("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src","LionInGrass_868x592_24","bmp","haha",msg);
 
-        //String decodedmsg = st.decode("C:\\Users\\Jonathan\\Desktop","enhanced");
-        //System.out.println(decodedmsg);
+        String decodedmsg = st.decode("C:\\Users\\Jonathan\\Desktop","enhanced");
+        System.out.println(decodedmsg);
         //Path path = Paths.get("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\haha.bmp");
         //Steganography st2 = new Steganography();
 

@@ -293,63 +293,72 @@ public class Steganography
                 byte oldbyte = (image[offset]);
                 int oldbytevalue = mapHistory.get(oldbyte);
                 byte a = (byte)((image[offset] & 0xFE) | b );
-                boolean leftcheck= false;
-                boolean  leftcheck1 =false;
-                boolean leftchecker=false;
-                boolean rightchecker=false;
-                boolean rightcheck=false;
-                boolean rightcheck1=false;
-                int checker = 0 ;
-                int check1=0;
-                int value = 0;
                 boolean isMiddleSpike= false;
                 double valueLeft=0;
                 double valueRight=0;
-                value = mapHistory.get(a);
+                int value = mapHistory.get(a);
                 try {
 
 
 
                     Byte getByte = a;
                     int leftvalue = getByte.intValue() - 1;
-                    //int intval = a.intValue();
-
                     int rightvalue = getByte.intValue() + 1;
-                    //System.out.println("value of a-1: " + a1);
-                    //System.out.println("value of a+1: " + a2);
 
 
-                    if (leftvalue>= -128 && leftvalue <=127){ // check if there is any byte on the left
+                    if ( (leftvalue>= -128 && leftvalue <=127 ) && (rightvalue>= -128 && rightvalue <=127)){ //if there are both left and right bits
                         byte a1 = (byte)(leftvalue); // convert new int value to byte value
-                        leftchecker =true;
+                        byte a2 = (byte)(rightvalue);
+                        //leftchecker =true;
                         valueLeft = mapHistory.get(a1);
-                        if ( value >= ((valueLeft)*1.05)){
-                            leftcheck =true;
+                        valueRight = mapHistory.get(a2);
+                        if ( (value >= ((valueLeft)*1.05)) && (value <= ((valueRight)*0.95)) ){
+                            image[offset] = a;
+                            mapHistory.put(a,++value);
+                            mapHistory.put(oldbyte,--oldbytevalue);
+                            output.add(Integer.toString(offset));
                         }
-                        if ( value <= ((valueLeft)*0.95)){
-                            leftcheck1=true;
+                        else if ( (value <= ((valueLeft)*0.95))&& ( value >= ((valueRight)*1.05)) ){
+                            image[offset] = a;
+                            mapHistory.put(a,++value);
+                            mapHistory.put(oldbyte,--oldbytevalue);
+                            output.add(Integer.toString(offset));
+                        } else {
+                            bit++;
                         }
 
+                    } else {
+                        bit++;
                     }
-                    if (rightvalue>= -128 && rightvalue <=127){
+
+                    /*
+                    else if ( !(leftvalue>= -128 && leftvalue <=127 )  &&(rightvalue>= -128 && rightvalue <=127)){ // if only right bit
                         byte a2 = (byte)(rightvalue);
                         valueRight = mapHistory.get(a2);
-                        rightchecker=true;
                         if (value <= ((valueRight)*0.95)){
-                            rightcheck =true;
+                            image[offset] = a;
+                            mapHistory.put(a,++value);
+                            mapHistory.put(oldbyte,--oldbytevalue);
+                            output.add(Integer.toString(offset));
                         }
-                        if ( value >= ((valueRight)*1.05)){
-                            rightcheck1=true;
+                        else if ( value >= ((valueRight)*1.05)){
+                            image[offset] = a;
+                            mapHistory.put(a,++value);
+                            mapHistory.put(oldbyte,--oldbytevalue);
+                            output.add(Integer.toString(offset));
                         }
-                        //System.out.println("right is true");
+
 
                     }
+                    */
                     if (valueLeft>0 && valueRight > 0 && value > valueRight && value > valueLeft ){
                         isMiddleSpike = true;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                /*
                 if ( (leftchecker && rightchecker && leftcheck && rightcheck) || (leftchecker && rightchecker && leftcheck1 && rightcheck1 )
                         || (!leftchecker && rightchecker && rightcheck) ||
                         (!leftchecker && rightchecker && rightcheck1) || (!rightchecker && leftchecker && leftcheck ) ||
@@ -363,6 +372,7 @@ public class Steganography
                     //System.out.println("NOT IN RANGE");
                 }else {
                     ++bit;
+                    */
 
 
 
@@ -373,9 +383,9 @@ public class Steganography
 
 
             }
-        }
 
-        /*
+
+
         try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Desktop\\stegno-index.txt", true);
              BufferedWriter bb = new BufferedWriter(f);
              PrintWriter p = new PrintWriter(bb);)
@@ -390,9 +400,10 @@ public class Steganography
         {
             s.printStackTrace();
         }
-        */
+
         return image;
     }
+
 
     /*
      *Retrieves hidden text from an image
@@ -415,7 +426,7 @@ public class Steganography
         */
 
         ArrayList<Integer> list = new ArrayList<>();
-        /*
+
         String fileName = "C:\\Users\\Jonathan\\Desktop\\stegno-index.txt";
 
         try (Scanner scanner = new Scanner(new File(fileName))) {
@@ -428,7 +439,7 @@ public class Steganography
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
+
         int sizeoftext = list.size()/8;
         byte[] result = new byte[sizeoftext];
         //loop through each byte of text

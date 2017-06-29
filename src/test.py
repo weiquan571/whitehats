@@ -1,7 +1,7 @@
 from random import randint
 import string
 b=""
-for x in range(0,300000):
+for x in range(0,200000):
     a=randint(1,255)
     b += str(chr(a))
 

@@ -290,7 +290,7 @@ public class Steganography
                 int b = (add >>> bit) & 1;
                 //assign the bit by taking: [(previous byte value) AND 0xfe] OR bit to add
                 //changes the last bit of the byte in the image to be the bit of addition
-                byte oldbyte = (byte)(image[offset]);
+                byte oldbyte = (image[offset]);
                 int oldbytevalue = mapHistory.get(oldbyte);
                 byte a = (byte)((image[offset] & 0xFE) | b );
                 int check= 0;
@@ -298,10 +298,12 @@ public class Steganography
                 int check1=0;
                 int value = 0;
                 boolean isMiddleSpike= false;
-
+                double valueLeft=0;
+                double valueRight=0;
+                value = mapHistory.get(a);
                 try {
 
-                    value = mapHistory.get(a);
+
 
                     Byte getByte = a;
                     int leftvalue = getByte.intValue() - 1;
@@ -310,18 +312,17 @@ public class Steganography
                     int rightvalue = getByte.intValue() + 1;
                     //System.out.println("value of a-1: " + a1);
                     //System.out.println("value of a+1: " + a2);
-                    int valueLeft=0;
-                    int valueRight=0;
+
 
                     if (leftvalue>= -128 && leftvalue <=127){
                         byte a1 = (byte)(leftvalue);
                         checker++;
                         valueLeft = mapHistory.get(a1);
-                        if ( value >= (valueLeft)){
+                        if ( value >= ((valueLeft)*1.05)){
                             check ++;
                             //System.out.println("left is true");
                         }
-                        if ( value <= (valueLeft)){
+                        if ( value <= ((valueLeft)*0.95)){
                             check1++;
                         }
 
@@ -330,10 +331,10 @@ public class Steganography
                         byte a2 = (byte)(rightvalue);
                         valueRight = mapHistory.get(a2);
                         checker++;
-                        if (value <= (valueRight)){
+                        if (value <= ((valueRight)*0.95)){
                             check ++;
                         }
-                        if ( value >= (valueRight)){
+                        if ( value >= ((valueRight)*1.05)){
                             check1++;
                         }
                         //System.out.println("right is true");
@@ -345,8 +346,8 @@ public class Steganography
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (check==checker || check1==checker){
-
+                if (check==checker || check1==checker ){
+                    System.out.println("Value:" + value +" left:" +valueLeft + " right: " + valueRight);
                     image[offset] = a;
                     //int valuea = mapHistory.get(a);
                     mapHistory.put(a,++value);
@@ -368,7 +369,7 @@ public class Steganography
         }
 
         /*
-        try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\stegno-index.txt", true);
+        try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Desktop\\stegno-index.txt", true);
              BufferedWriter bb = new BufferedWriter(f);
              PrintWriter p = new PrintWriter(bb);)
         {
@@ -407,7 +408,8 @@ public class Steganography
         */
 
         ArrayList<Integer> list = new ArrayList<>();
-        String fileName = "C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\stegno-index.txt";
+        /*
+        String fileName = "C:\\Users\\Jonathan\\Desktop\\stegno-index.txt";
 
         try (Scanner scanner = new Scanner(new File(fileName))) {
 
@@ -419,7 +421,7 @@ public class Steganography
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        */
         int sizeoftext = list.size()/8;
         byte[] result = new byte[sizeoftext];
         //loop through each byte of text

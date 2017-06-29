@@ -10,8 +10,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -53,12 +52,21 @@ public class TestHistogram {
         st.encode("C:\\Users\\Jonathan\\Desktop","11","bmp","enhanced",msg);
         //st.encode_with_byte("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src","LionInGrass_868x592_24","bmp","haha",msg);
 
-        //String decodedmsg = st.decode("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src","haha");
+        //String decodedmsg = st.decode("C:\\Users\\Jonathan\\Desktop","enhanced");
         //System.out.println(decodedmsg);
         //Path path = Paths.get("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\haha.bmp");
         //Steganography st2 = new Steganography();
 
+        /*
+        try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Desktop\\output.txt", false);
+             BufferedWriter bb = new BufferedWriter(f);
+             PrintWriter p = new PrintWriter(bb);)
+        {
+            p.println();
 
+
+        }
+        */
         try {
             Map<Byte,Integer> mapHistory11 = getTreeMap("C:\\Users\\Jonathan\\Desktop\\11.bmp");
 
@@ -215,7 +223,7 @@ public class TestHistogram {
         //DataBufferByte buffer = (DataBufferByte) raster.getDataBuffer();
         //byte [] temp1 = buffer.getData();
         //byte[] temp1 = Files.readAllBytes(path);
-        HashMap<Byte,Integer> mapHistory = new HashMap<>(255);
+        HashMap<Byte,Integer> mapHistory = new HashMap<>();
         for ( byte b : image){
             if (mapHistory.containsKey(b)){
                 int count = mapHistory.get(b);

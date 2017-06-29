@@ -315,7 +315,7 @@ public class Steganography
                             check ++;
                             //System.out.println("left is true");
                         }
-                        if ( value <= (valueLeft*1.03)){
+                        if ( value <= (valueLeft*1.02)){
                             check1++;
                         }
 
@@ -323,7 +323,7 @@ public class Steganography
                     if (mapHistory.containsKey(a2)){
                         valueRight = mapHistory.get(a2);
                         checker++;
-                        if (value <= (valueRight*1.03)){
+                        if (value <= (valueRight*1.02)){
                             check ++;
                         }
                         if ( value >= (valueRight*0.95)){
@@ -337,7 +337,7 @@ public class Steganography
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (check==checker || check1==checker || isMiddleSpike){
+                if (check==checker || check1==checker){
 
                     image[offset] = a;
                     //int valuea = mapHistory.get(a);

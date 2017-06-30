@@ -123,6 +123,23 @@ public class TestHistogram {
             }
 
             */
+            /*
+            try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Desktop\\yourmom.txt", true);
+                 BufferedWriter bb = new BufferedWriter(f);
+                 PrintWriter p = new PrintWriter(bb);)
+            {
+                for (Byte treekey : mapHistory1.keySet()){
+                    p.println(treekey.toString() + " " + mapHistory1.get(treekey));
+                }
+
+
+            }
+            catch (IOException s)
+            {
+                s.printStackTrace();
+            }
+            */
+
             JFrame frame = new JFrame("enchanced");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());

@@ -373,18 +373,11 @@ public class Steganography
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
-
-
-
-
-                }
-
-
-
             }
+
+
+
+        }
 
 
 
@@ -414,18 +407,6 @@ public class Steganography
      */
     private byte[] decode_text(byte[] image)
     {
-        /*
-        int length = 0;
-        int offset = 32;
-        //loop through 32 bytes of data to determine text length
-        for(int i=0; i<32; ++i) //i=24 will also work, as only the 4th byte contains real data
-        {
-            length = (length << 1) | (image[i] & 1);
-        }
-
-
-
-        */
 
         ArrayList<Integer> list = new ArrayList<>();
 
@@ -461,35 +442,4 @@ public class Steganography
 
         return result;
     }
-    /*
-                            try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Desktop\\yourdad.txt", true);
-                                 BufferedWriter bb = new BufferedWriter(f);
-                                 PrintWriter p = new PrintWriter(bb);)
-                            {
-
-                                p.println("Byte:"+ a + "Left Value:" + valueLeft +" Value:" + value + " Right Value: " + valueRight);
-
-
-
-                            }
-                            catch (IOException s)
-                            {
-                                s.printStackTrace();
-                            }
-                            */
-     /*
-                if ( (leftchecker && rightchecker && leftcheck && rightcheck) || (leftchecker && rightchecker && leftcheck1 && rightcheck1 )
-                        || (!leftchecker && rightchecker && rightcheck) ||
-                        (!leftchecker && rightchecker && rightcheck1) || (!rightchecker && leftchecker && leftcheck ) ||
-                        (!rightchecker && leftchecker && leftcheck1) ){
-                    //System.out.println("Value:" + value +" left:" +valueLeft + " right: " + valueRight);
-                    image[offset] = a;
-                    //int valuea = mapHistory.get(a);
-                    mapHistory.put(a,++value);
-                    mapHistory.put(oldbyte,--oldbytevalue);
-                    output.add(Integer.toString(offset));
-                    //System.out.println("NOT IN RANGE");
-                }else {
-                    ++bit;
-                    */
 }

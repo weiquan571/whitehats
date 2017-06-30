@@ -140,7 +140,7 @@ public class TestHistogram {
             }
             */
 
-            JFrame frame = new JFrame("enchanced");
+            JFrame frame = new JFrame("enhanced");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());
             frame.add(new JScrollPane(new Graph(mapHistory1)));

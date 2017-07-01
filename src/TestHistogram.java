@@ -37,36 +37,16 @@ public class TestHistogram {
     }
 
     public TestHistogram() throws IOException {
-
-
-        //Path path = Paths.get("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\hid_lsb_4_LionInGrass_868x592_24.bmp");
-        //Path path = Paths.get("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\LionInGrass_868x592_24.bmp");
-
-        //Path path1 = Paths.get("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\abcdefg.txt");
         String msg = new String(Files.readAllBytes(Paths.get("C:\\Users\\Jonathan\\Desktop\\a\\wh\\src\\input.txt")));
-        //byte[] msg = Files.readAllBytes(path1);
-        //String msg = "";
         Stegno1 steg = new Stegno1();
         steg.encode("C:\\Users\\Jonathan\\Desktop","11","bmp","standard",msg);
         Steganography st = new Steganography();
         st.encode("C:\\Users\\Jonathan\\Desktop","11","bmp","enhanced",msg);
-        //st.encode_with_byte("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src","LionInGrass_868x592_24","bmp","haha",msg);
+
 
         String decodedmsg = st.decode("C:\\Users\\Jonathan\\Desktop","enhanced");
         System.out.println(decodedmsg);
-        //Path path = Paths.get("C:\\Users\\Jonathan\\Downloads\\Day2\\ShoppingCartEx1\\Design1\\wh\\src\\haha.bmp");
-        //Steganography st2 = new Steganography();
 
-        /*
-        try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Desktop\\output.txt", false);
-             BufferedWriter bb = new BufferedWriter(f);
-             PrintWriter p = new PrintWriter(bb);)
-        {
-            p.println();
-
-
-        }
-        */
         try {
             Map<Byte,Integer> mapHistory11 = getTreeMap("C:\\Users\\Jonathan\\Desktop\\11.bmp");
 
@@ -123,22 +103,7 @@ public class TestHistogram {
             }
 
             */
-            /*
-            try (FileWriter f = new FileWriter("C:\\Users\\Jonathan\\Desktop\\yourmom.txt", true);
-                 BufferedWriter bb = new BufferedWriter(f);
-                 PrintWriter p = new PrintWriter(bb);)
-            {
-                for (Byte treekey : mapHistory1.keySet()){
-                    p.println(treekey.toString() + " " + mapHistory1.get(treekey));
-                }
 
-
-            }
-            catch (IOException s)
-            {
-                s.printStackTrace();
-            }
-            */
 
             JFrame frame = new JFrame("enhanced");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

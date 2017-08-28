@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,18 +39,32 @@ public class TestHistogram {
     }
 
     public TestHistogram() throws IOException {
-        String msg = new String(Files.readAllBytes(Paths.get("C:\\Users\\Jonathan\\Desktop\\a\\wh\\src\\input.txt")));
+
+
+        String msg = new String(Files.readAllBytes(Paths.get("C:\\Users\\Jonathan\\Desktop\\input1.txt")), Charset.forName("iso-8859-1"));
         Stegno1 steg = new Stegno1();
-        steg.encode("C:\\Users\\Jonathan\\Desktop","11","bmp","standard",msg);
+        steg.encode("C:\\Users\\Jonathan\\Desktop","10","bmp","standard",msg);
         Steganography st = new Steganography();
-        st.encode("C:\\Users\\Jonathan\\Desktop","11","bmp","enhanced",msg);
+        st.encode("C:\\Users\\Jonathan\\Desktop","10","bmp","enhanced",msg);
 
 
         String decodedmsg = st.decode("C:\\Users\\Jonathan\\Desktop","enhanced");
-        System.out.println(decodedmsg);
+        //System.out.println(decodedmsg);
 
         try {
-            Map<Byte,Integer> mapHistory11 = getTreeMap("C:\\Users\\Jonathan\\Desktop\\11.bmp");
+            //OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("C:\\Users\\Jonathan\\Desktop\\output.txt"), StandardCharsets.UTF_8);
+            OutputStream writer = new FileOutputStream("C:\\Users\\Jonathan\\Desktop\\output.txt");
+            writer.write(decodedmsg.getBytes("iso-8859-1"));  //Replace with the string
+            //you are trying to write
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("Exception ");
+
+        }
+        try {
+            Map<Byte,Integer> mapHistory11 = getTreeMap("C:\\Users\\Jonathan\\Desktop\\10.bmp");
 
             /*
             for ( Byte treekey : mapHistory.keySet()){
@@ -118,6 +134,7 @@ public class TestHistogram {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 

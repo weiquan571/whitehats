@@ -311,33 +311,34 @@ public class Steganography
                         //leftchecker =true;
                         valueLeft = mapHistory.get(a1);
                         valueRight = mapHistory.get(a2);
-                        if ( (value + 1) < valueLeft && (value + 1 ) < valueLeft && valueLeft < valueRight && (value +1 ) <= valueRight ) {
+                        if ( (value + 1) < valueLeft && (value + 1 ) < valueLeft && valueLeft <= valueRight && (value +1 ) < valueRight ) {
                             if ((oldByteLeft >= -128 && oldByteLeft <= 127) && (oldByteRight >= -128 && oldByteRight <= 127)) {
                                 byte a3 = (byte) (oldByteLeft);
                                 byte a4 = (byte) (oldByteRight);
+
                                 mapHistory.put(a, ++value);
                                 valueOldByteLeft = mapHistory.get(a3);
                                 valueOldByteRight = mapHistory.get(a4);
 
-                                if ( (oldbytevalue - 1)> valueOldByteLeft && (oldbytevalue - 1 )> valueOldByteRight && valueOldByteLeft > valueOldByteRight && ((oldbytevalue-1) >= valueOldByteLeft)) {
+                                if ( (oldbytevalue - 1)> valueOldByteLeft && (oldbytevalue - 1 )> valueOldByteRight && valueOldByteLeft >= valueOldByteRight && ((oldbytevalue-1) > valueOldByteLeft)) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( (oldbytevalue - 1)> valueOldByteLeft && ( oldbytevalue - 1) > valueOldByteRight && valueOldByteLeft < valueOldByteRight && ((oldbytevalue-1) >= valueOldByteRight) ) {
+                                } else if ( (oldbytevalue - 1)> valueOldByteLeft && ( oldbytevalue - 1) > valueOldByteRight && valueOldByteLeft <= valueOldByteRight && ((oldbytevalue-1) > valueOldByteRight) ) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( ((oldbytevalue - 1) >= (valueOldByteLeft)) && ((oldbytevalue - 1) <= (valueOldByteRight))) {
+                                } else if ( valueOldByteRight > valueOldByteLeft && ((oldbytevalue -1) > 1.15 * valueOldByteLeft)) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( ((oldbytevalue - 1) <= (valueOldByteLeft)) && ((oldbytevalue - 1) >= (valueOldByteRight))) {
+                                } else if ( valueOldByteRight < valueOldByteLeft && ((oldbytevalue-1) < 1.15 * valueOldByteLeft) ) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
@@ -350,7 +351,7 @@ public class Steganography
                             } else {
                                 ++bit;
                             }
-                        } else if ( (value + 1) < valueRight && (value + 1 ) < valueLeft && valueLeft > valueRight && (value +1 ) <= valueLeft) {
+                        } else if ( (value + 1) < valueRight && (value + 1 ) < valueLeft && valueLeft >= valueRight && (value +1 ) < valueLeft) {
                             if ((oldByteLeft >= -128 && oldByteLeft <= 127) && (oldByteRight >= -128 && oldByteRight <= 127)) {
                                 byte a3 = (byte) (oldByteLeft);
                                 byte a4 = (byte) (oldByteRight);
@@ -358,25 +359,66 @@ public class Steganography
                                 valueOldByteLeft = mapHistory.get(a3);
                                 valueOldByteRight = mapHistory.get(a4);
 
-                                if ( (oldbytevalue - 1)> valueOldByteLeft && (oldbytevalue - 1 )> valueOldByteRight && valueOldByteLeft > valueOldByteRight && ((oldbytevalue-1) >= valueOldByteLeft)) {
+                                if ( (oldbytevalue - 1)> valueOldByteLeft && (oldbytevalue - 1 )> valueOldByteRight && valueOldByteLeft >= valueOldByteRight && ((oldbytevalue-1) > valueOldByteLeft)) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( (oldbytevalue - 1)> valueOldByteLeft && ( oldbytevalue - 1) > valueOldByteRight && valueOldByteLeft < valueOldByteRight && ((oldbytevalue-1) >= valueOldByteRight) ) {
+                                } else if ( (oldbytevalue - 1)> valueOldByteLeft && ( oldbytevalue - 1) > valueOldByteRight && valueOldByteLeft <= valueOldByteRight && ((oldbytevalue-1) > valueOldByteRight) ) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( ((oldbytevalue - 1) >= (valueOldByteLeft)) && ((oldbytevalue - 1) <= (valueOldByteRight))) {
+                                } else if ( valueOldByteRight > valueOldByteLeft && ((oldbytevalue -1) > 1.15* valueOldByteLeft) ) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( ((oldbytevalue - 1) <= (valueOldByteLeft)) && ((oldbytevalue - 1) >= (valueOldByteRight))) {
+                                } else if ( valueOldByteRight < valueOldByteLeft && ((oldbytevalue-1) < 1.15* valueOldByteLeft) ) {
+                                    image[offset] = a;
+
+                                    mapHistory.put(oldbyte, --oldbytevalue);
+                                    output.add(Integer.toString(offset));
+
+
+                                } else {
+                                    mapHistory.put(a, --value);
+                                    ++bit;
+                                }
+                            } else {
+                                ++bit;
+                            }
+
+                        } else if ( valueLeft < valueRight && (value +1 ) > valueLeft && (value +1  ) < valueRight) {
+                            if ((oldByteLeft >= -128 && oldByteLeft <= 127) && (oldByteRight >= -128 && oldByteRight <= 127)) {
+                                byte a3 = (byte) (oldByteLeft);
+                                byte a4 = (byte) (oldByteRight);
+                                mapHistory.put(a, ++value);
+                                valueOldByteLeft = mapHistory.get(a3);
+                                valueOldByteRight = mapHistory.get(a4);
+
+                                if ( (oldbytevalue - 1)> valueOldByteLeft && (oldbytevalue - 1 )> valueOldByteRight && valueOldByteLeft >= valueOldByteRight && ((oldbytevalue-1) > valueOldByteLeft)) {
+                                    image[offset] = a;
+
+                                    mapHistory.put(oldbyte, --oldbytevalue);
+                                    output.add(Integer.toString(offset));
+
+                                } else if ( (oldbytevalue - 1)> valueOldByteLeft && ( oldbytevalue - 1) > valueOldByteRight && valueOldByteLeft <= valueOldByteRight && ((oldbytevalue-1) > valueOldByteRight) ) {
+                                    image[offset] = a;
+
+                                    mapHistory.put(oldbyte, --oldbytevalue);
+                                    output.add(Integer.toString(offset));
+
+                                } else if ( valueOldByteRight > valueOldByteLeft && ((oldbytevalue -1) > 1.15 * valueOldByteLeft) ) {
+                                    image[offset] = a;
+
+                                    mapHistory.put(oldbyte, --oldbytevalue);
+                                    output.add(Integer.toString(offset));
+
+                                } else if ( valueOldByteRight < valueOldByteLeft && ((oldbytevalue-1) < 1.15*valueOldByteLeft) ) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
@@ -389,8 +431,7 @@ public class Steganography
                             } else {
                                 ++bit;
                             }
-
-                        } else if ( (value +1 ) >= valueLeft && (value +1  ) <= valueRight) {
+                        } else if ( valueLeft > valueRight && (value +1 ) < valueLeft && (value +1 ) > valueRight ) {
                             if ((oldByteLeft >= -128 && oldByteLeft <= 127) && (oldByteRight >= -128 && oldByteRight <= 127)) {
                                 byte a3 = (byte) (oldByteLeft);
                                 byte a4 = (byte) (oldByteRight);
@@ -398,68 +439,30 @@ public class Steganography
                                 valueOldByteLeft = mapHistory.get(a3);
                                 valueOldByteRight = mapHistory.get(a4);
 
-                                if ( (oldbytevalue - 1)> valueOldByteLeft && (oldbytevalue - 1 )> valueOldByteRight && valueOldByteLeft > valueOldByteRight && ((oldbytevalue-1) >= valueOldByteLeft)) {
+                                if ( (oldbytevalue - 1)> valueOldByteLeft && (oldbytevalue - 1 )> valueOldByteRight && valueOldByteLeft >= valueOldByteRight && ((oldbytevalue-1) > valueOldByteLeft)) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( (oldbytevalue - 1)> valueOldByteLeft && ( oldbytevalue - 1) > valueOldByteRight && valueOldByteLeft < valueOldByteRight && ((oldbytevalue-1) >= valueOldByteRight) ) {
+                                } else if ( (oldbytevalue - 1)> valueOldByteLeft && ( oldbytevalue - 1) > valueOldByteRight && valueOldByteLeft <= valueOldByteRight && ((oldbytevalue-1) > valueOldByteRight) ) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( ((oldbytevalue - 1) >= (valueOldByteLeft)) && ((oldbytevalue - 1) <= (valueOldByteRight))) {
+                                } else if ( valueOldByteRight > valueOldByteLeft && ((oldbytevalue -1) > 1.15* valueOldByteLeft) ) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else if ( ((oldbytevalue - 1) <= (valueOldByteLeft)) && ((oldbytevalue - 1) >= (valueOldByteRight))) {
+                                } else if ( valueOldByteRight < valueOldByteLeft && ((oldbytevalue-1) < 1.15* valueOldByteLeft)) {
                                     image[offset] = a;
 
                                     mapHistory.put(oldbyte, --oldbytevalue);
                                     output.add(Integer.toString(offset));
 
-                                } else {
-                                    mapHistory.put(a, --value);
-                                    ++bit;
-                                }
-                            } else {
-                                ++bit;
-                            }
-                        } else if ( (value +1 ) <= valueLeft && (value +1 ) >= valueRight ) {
-                            if ((oldByteLeft >= -128 && oldByteLeft <= 127) && (oldByteRight >= -128 && oldByteRight <= 127)) {
-                                byte a3 = (byte) (oldByteLeft);
-                                byte a4 = (byte) (oldByteRight);
-                                mapHistory.put(a, ++value);
-                                valueOldByteLeft = mapHistory.get(a3);
-                                valueOldByteRight = mapHistory.get(a4);
-
-                                if ( (oldbytevalue - 1)> valueOldByteLeft && (oldbytevalue - 1 )> valueOldByteRight && valueOldByteLeft > valueOldByteRight && ((oldbytevalue-1) >= valueOldByteLeft)) {
-                                    image[offset] = a;
-
-                                    mapHistory.put(oldbyte, --oldbytevalue);
-                                    output.add(Integer.toString(offset));
-
-                                } else if ( (oldbytevalue - 1)> valueOldByteLeft && ( oldbytevalue - 1) > valueOldByteRight && valueOldByteLeft < valueOldByteRight && ((oldbytevalue-1) >= valueOldByteRight) ) {
-                                    image[offset] = a;
-
-                                    mapHistory.put(oldbyte, --oldbytevalue);
-                                    output.add(Integer.toString(offset));
-
-                                } else if ( ((oldbytevalue - 1) >= (valueOldByteLeft)) && ((oldbytevalue - 1) <= (valueOldByteRight))) {
-                                    image[offset] = a;
-
-                                    mapHistory.put(oldbyte, --oldbytevalue);
-                                    output.add(Integer.toString(offset));
-
-                                } else if ( ((oldbytevalue - 1) <= (valueOldByteLeft)) && ((oldbytevalue - 1) >= (valueOldByteRight))) {
-                                    image[offset] = a;
-
-                                    mapHistory.put(oldbyte, --oldbytevalue);
-                                    output.add(Integer.toString(offset));
 
                                 } else {
                                     mapHistory.put(a, --value);

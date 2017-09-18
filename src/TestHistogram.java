@@ -41,7 +41,7 @@ public class TestHistogram {
     public TestHistogram() throws IOException {
 
 
-        String msg = new String(Files.readAllBytes(Paths.get("C:\\Users\\Jonathan\\Desktop\\input1.txt")), Charset.forName("iso-8859-1"));
+        String msg = new String(Files.readAllBytes(Paths.get("C:\\Users\\Jonathan\\Desktop\\input.txt")), Charset.forName("iso-8859-1"));
         Stegno1 steg = new Stegno1();
         steg.encode("C:\\Users\\Jonathan\\Desktop","10","bmp","standard",msg);
         Steganography st = new Steganography();
